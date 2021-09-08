@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS post;
+DROP TABLE IF EXISTS product;
 
 CREATE TABLE user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -14,5 +15,16 @@ CREATE TABLE post (
     title TEXT NOT NULL,
     body TEXT NOT NULL,
     FOREIGN KEY (author_id) REFERENCES user (id)
+    );
+
+CREATE TABLE product (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    price NUMERIC NOT NULL,
+    quantity INTEGER NOT NULL DEFAULT 1,
+    FOREIGN KEY (user_id) REFERENCES user (id)
     );
     
