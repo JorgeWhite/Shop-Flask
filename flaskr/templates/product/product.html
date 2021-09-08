@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}{{ product['name'] }}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+{% if g.user['id'] == product['user_id'] %}
+  <form method="post">
+    <label for="name">Name</label>
+    <input name="name" id="name" value="{{ product['name'] }}" required>
+    <label for="description">Description</label>
+    <input name="description" id="description" value="{{ product['description'] }}" required>
+    <label for="price">Price</label>
+    <input name="price" id="price" value="{{ product['price'] }}" required>
+    <input type="submit" value="Save">
+  </form>
+{% else %}
+  <form>
+    <label for="description">Description</label>
+    <input name="description" id="description" value="{{ product['description'] }}" required>
+    <label for="price">Price</label>
+    <input name="price" id="price" value="{{ product['price'] }}" required>
+
+  </form>
+{% endif %}
+{% endblock %}
