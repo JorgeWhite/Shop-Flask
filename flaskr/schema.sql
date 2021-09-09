@@ -28,3 +28,24 @@ CREATE TABLE product (
     FOREIGN KEY (user_id) REFERENCES user (id)
     );
     
+CREATE TABLE purchase (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    product_id INTEGER NOT NULL,
+    date DATE NOT NULL DEFAULT DATE,
+    address VARCHAR(100) NOT NULL,
+    payment VARCHAR(20) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (product_id) REFERENCES product (id)
+    );
+
+CREATE TABLE review (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    product_id INTEGER NOT NULL,
+    description TEXT NOT NULL,
+    score INTEGER NOT NULL,
+    date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (product_id) REFERENCES product (id)
+    );

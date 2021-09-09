@@ -13,7 +13,7 @@
     <input name="description" id="description" value="{{ product['description'] }}" required>
     <label for="price">Price</label>
     <input name="price" id="price" value="{{ product['price'] }}" required>
-    <input type="submit" value="Save">
+    <td class="text-center align-middle"><a href="{{ url_for('product.update', id = product['id']) }}">Edit</a></td>
   </form>
 {% else %}
   <form>
@@ -21,6 +21,11 @@
     <input name="description" id="description" value="{{ product['description'] }}" required>
     <label for="price">Price</label>
     <input name="price" id="price" value="{{ product['price'] }}" required>
+    <label for="quantity">Quantity</label>
+    <input name="quantity" id="quantity" required>
+    <form action="{{ url_for('product.add_to_cart', id=product['id']) }}" method="post">
+      <input class="danger" type="submit" value="Add to cart" onclick="return confirm('Are you sure?');">
+    </form>
 
   </form>
 {% endif %}

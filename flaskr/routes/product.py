@@ -1,5 +1,6 @@
+from itertools import product
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 import flask
 from werkzeug.exceptions import abort
@@ -105,3 +106,17 @@ def delete(id):
     )
     db.commit()
     return redirect(url_for('product.index'))
+
+@bp.route('/<int:id>/add-to-cart', methods=('POST','GET'))
+@login_required
+def add_to_cart(id):
+    product = get_product(id, check_author=False)
+    print('hi')
+    if request.method == 'POST':
+        quantity = request.form['quantity']
+        if 'cart' not in session:
+            session['cart'] = []
+        session['cart'].append({'id': id, 'quantity': quantity})
+        return redirect(url_for('product.index'))
+    return render_template('/product/product.html', product=product)
+
