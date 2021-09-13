@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Your Purchases, {{  }} {% endblock %}</h1>
+  <h1>{% block title %}Your Purchases, {{ user['username'] }} {% endblock %}</h1>
 {% endblock %}
 
 {% block content %}

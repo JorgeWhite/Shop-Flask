@@ -106,15 +106,13 @@ def delete(id):
     db.commit()
     return redirect(url_for('product.index'))
 
-@bp.route('/<int:id>/add-to-cart', methods=['POST'])
-def add_to_cart(id, quantity):
-    print('hi')
-    #xproduct = get_product(id, check_author=False)
-    #if request.method == 'POST':
-    if 'cart' not in session:
+@bp.route('/<int:id>/add-to-cart', methods=['GET'])
+@login_required
+def add_to_cart(id):
+    if not 'cart' in session:
         session['cart'] = []
-    session['cart'].append({'id': id, 'quantity': quantity})
+
+    session['cart'].append({'id': id, 'quantity': 1})
     session.modified = True
-    return redirect(url_for('product.index'))
-    #return render_template('product/product.html', product=product)
+    return redirect(url_for('purchase.cart'))
 
