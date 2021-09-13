@@ -27,10 +27,12 @@ def create_app(test_config=None):
 
     from .routes import blog
     app.register_blueprint(blog.bp)
-    app.add_url_rule('/', endpoint='index')
 
     from .routes import product
     app.register_blueprint(product.bp)
+
+    from .routes import purchase
+    app.register_blueprint(purchase.bp)
     
     
     return app

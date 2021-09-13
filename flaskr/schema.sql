@@ -1,6 +1,8 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS purchase;
+DROP TABLE IF EXISTS review;
 
 CREATE TABLE user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -28,3 +30,24 @@ CREATE TABLE product (
     FOREIGN KEY (user_id) REFERENCES user (id)
     );
     
+CREATE TABLE purchase (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    product_id INTEGER NOT NULL,
+    date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    address VARCHAR(100) NOT NULL,
+    payment VARCHAR(20) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (product_id) REFERENCES product (id)
+    );
+
+CREATE TABLE review (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    product_id INTEGER NOT NULL,
+    description TEXT NOT NULL,
+    score INTEGER NOT NULL,
+    date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (product_id) REFERENCES product (id)
+    );

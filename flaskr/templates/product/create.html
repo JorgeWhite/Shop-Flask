@@ -11,9 +11,9 @@
     <label for="description">Description</label>
     <textarea name="description" id="description">{{ request.form['description'] }}</textarea>
     <label for="price">Price</label>
-    <input name="price" id="price" value="{{ request.form['price'] }}" required>
+    <input name="price" id="price" type = "number" value="{{ request.form['price'] }}" required>
     <label for="quantity">Quantity</label>
-    <input name="quantity" id="quantity" value="{{ request.form['quantity'] }}" >
+    <input name="quantity" id="quantity" type = "number" value="{{ request.form['quantity'] }}" >
     <input type="submit" value="Save">
   </form>
 {% endblock %}

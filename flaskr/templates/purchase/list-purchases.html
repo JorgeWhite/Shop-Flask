@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Your Purchases, {{ user['username'] }} {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th class="text-center">Product</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Purchase date</th>
+            <th class="text-center"></th>
+        </tr>
+    </thead>
+    <tbody>               
+      {% for purchase in purchases: %}
+        <td class="text-center align-middle">{{ purchase['name'] }}</td>
+        <td class="text-center align-middle">{{ purchase['price'] }}</td>
+        <td class="text-center align-middle">{{ purchase['date'] }}</td>
+    </tbody>
+      {% endfor %}
+  </table>
+
+{% endblock %}

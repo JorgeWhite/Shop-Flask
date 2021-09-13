@@ -15,9 +15,7 @@
           <h1>{{ product['name'] }}</h1>
           <div class="about">by {{ product['username'] }} on {{ product['created'].strftime('%Y-%m-%d') }}</div>
         </div>
-        {% if g.user['id'] == product['user_id'] %}
-          <a class="action" href="{{ url_for('product.update', id=product['id']) }}">Edit</a>
-        {% endif %}
+          <a class="action" href="{{ url_for('product.single_product', id=product['id']) }}">View</a>
       </header>
       <p class="body">{{ product['description'] }}</p>
     </article>

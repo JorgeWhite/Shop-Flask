@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Your Cart {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <tbody>               
+      {% for item in items: %}
+        <td class="text-center align-middle">{{ item['id'] }}</td>
+        <td class="text-center align-middle">{{ item['quantity'] }}</td>
+    </tbody>
+      {% endfor %}
+      <td class="text-center align-middle"><a href="{{ url_for('purchase.checkout') }}">Checkout</a></td>
+
+
+
+{% endblock %}

@@ -1,7 +1,7 @@
+from itertools import product
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
-import flask
 from werkzeug.exceptions import abort
 from .auth import login_required
 from flaskr.db import get_db
@@ -24,8 +24,8 @@ def create():
     if request.method == 'POST':
         name = request.form['name']
         description = request.form['description']
-        price = request.form['price']
-        quantity = request.form['quantity']
+        price = float(request.form['price'])
+        quantity = int(request.form['quantity'])
         error = None
 
         if not name:
@@ -50,7 +50,7 @@ def create():
 
 def get_product(id, check_author=True):
     product = get_db().execute(
-        'SELECT p.id, name, description, created, user_id, username'
+        'SELECT p.id, name, description, created, user_id, username, price, quantity'
         ' FROM product p JOIN user u ON u.id = p.user_id'
         ' WHERE p.id = ?',
         (id,)
@@ -105,3 +105,14 @@ def delete(id):
     )
     db.commit()
     return redirect(url_for('product.index'))
+
+@bp.route('/<int:id>/add-to-cart', methods=['GET'])
+@login_required
+def add_to_cart(id):
+    if not 'cart' in session:
+        session['cart'] = []
+
+    session['cart'].append({'id': id, 'quantity': 1})
+    session.modified = True
+    return redirect(url_for('purchase.cart'))
+
