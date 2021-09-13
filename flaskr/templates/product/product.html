@@ -12,7 +12,7 @@
     <label for="description">Description</label>
     <input name="description" id="description" value="{{ product['description'] }}" required>
     <label for="price">Price</label>
-    <input name="price" id="price" value="{{ product['price'] }}" required>
+    <input name="price" id="price" type = "number" value="{{ product['price'] }}" required>
     <td class="text-center align-middle"><a href="{{ url_for('product.update', id = product['id']) }}">Edit</a></td>
   </form>
 {% else %}
@@ -20,11 +20,12 @@
     <label for="description">Description</label>
     <input name="description" id="description" value="{{ product['description'] }}" required>
     <label for="price">Price</label>
-    <input name="price" id="price" value="{{ product['price'] }}" required>
+    <input name="price" id="price" type = "number" value="{{ product['price'] }}" required>
     <label for="quantity">Quantity</label>
-    <input name="quantity" id="quantity" required>
-    <form action="{{ url_for('product.add_to_cart', id=product['id']) }}" method="post">
-      <input class="danger" type="submit" value="Add to cart" onclick="return confirm('Are you sure?');">
+    <input name="quantity" id="quantity" type= "number" value = "{{ product['quantity'] }}"required>
+    <td class="text-center align-middle"><a href="{{ url_for('purchase.buy_product', product_id=product['id']) }}">Buy</a></td>
+    <form href="{{ url_for('product.add_to_cart', id=product['id'], quantity=request.form['quantity']) }}" method="post">
+      <input type="submit" method = "post" value="Add to cart" onclick="return confirm('Are you sure?');">
     </form>
 
   </form>

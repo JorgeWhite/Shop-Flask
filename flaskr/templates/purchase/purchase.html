@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %} Confirm your personal information {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="address">Address</label>
+    <input name="address" id="address" required>
+
+
+    <label for="payment">Choose a payment method:</label>
+
+    <select name="payment" id="payment">
+      <option value="cash">Cash</option>
+      <option value="credit-debit">Credit/Debit card</option>
+
+    </select>
+
+    <input type="submit" value="Confirm your purchase">
+
+</form>
+{% endblock %}
